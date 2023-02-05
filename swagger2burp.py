@@ -37,8 +37,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file", help="URL of the openapi.json file", required=True)
     parser.add_argument("-b", "--base-path", help="Base path for API endpoints", required=True)
-    parser.add_argument("-ho", "--host-header", help="Base path for API endpoints", required=True)
-    parser.add_argument("-t", "--token", help="Base path for API endpoints", required=True)
+    parser.add_argument("-ho", "--host-header", help="Value for Host header", required=True)
+    parser.add_argument("-t", "--token", help="Value for JWT token", required=True)
     args = parser.parse_args()
 
     with open(args.file) as f:
