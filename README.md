@@ -10,9 +10,9 @@ options:
   -b BASE_PATH, --base-path BASE_PATH
                         Base path for API endpoints
   -ho HOST_HEADER, --host-header HOST_HEADER
-                        Base path for API endpoints
+                        Value for Host header
   -t TOKEN, --token TOKEN
-                        Base path for API endpoints
+                        Value for JWT token
 
 ```
 
