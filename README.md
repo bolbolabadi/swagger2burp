@@ -1,25 +1,58 @@
-# swagger2burp
-Convert Swagger openapi.json file to burp suite request files
+# Swagger2Burp
 
-```
-usage: swagger2burp.py [-h] -f FILE -b BASE_PATH -ho HOST_HEADER -t TOKEN
+Import Swagger/OpenAPI definitions (Swagger 2.0 and OpenAPI 3) into Burp Suite and generate one example HTTP request per operation, ready to send to Repeater.
 
-options:
-  -h, --help            show this help message and exit
-  -f FILE, --file FILE  URL of the openapi.json file
-  -b BASE_PATH, --base-path BASE_PATH
-                        Base path for API endpoints
-  -ho HOST_HEADER, --host-header HOST_HEADER
-                        Value for Host header
-  -t TOKEN, --token TOKEN
-                        Value for JWT token
+## Features
+- **Multiple input modes**: URL(s) to JSON/YAML specs, or paste Raw JSON directly. Auto-detects JSON and tries YAML when available.
+- **Auth when fetching specs**: Optional JWT and custom headers used for retrieving remote specs.
+- **Base URL handling**: Uses servers/basePath from the spec (if enabled) or a user-provided Base URL override.
+- **Path and query params**: Optionally fills `{path}` params and includes query parameters with sample values.
+- **Request bodies**: Generates example JSON body from schemas/examples where available.
+- **Quick preview and send**: Preview all generated requests and send selected ones to Repeater.
 
-```
+## Why it’s helpful
+Great for quickly bootstrapping testing coverage against large APIs. You’ll have a ready list of endpoints pre-populated with reasonable parameter/body samples.
 
+## Requirements
+- Burp Suite with Montoya API support (Community or Professional)
+- Release JAR bundles dependencies (Jackson for JSON, SnakeYAML for YAML)
+- Optional legacy: Python/Jython 2.7 if using the `.py` version
 
-Example:
-```
-python3 swagger2burp.py -f openapi.json -b https://swagger.domain.com -ho swagger.domain.com -t eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
-eyJpc3MiOiJ0b3B0YWwuY29tIiwiZXhwIjoxNDI2NDIwODAwLCJodHRwOi8vdG9wdGFsLmNvbS9qd3RfY2xhaW1zL2lzX2FkbWluIjp0cnVlLCJjb21wYW55IjoiVG9wdGFsIiwiYXdlc29tZSI6dHJ1ZX0.
-yRQYnWzskCZUxPwaQupWkiUzKELZ49eM7oWxAQK_ZXw 
-```
+## Installation
+### Java (recommended)
+1. Download the release JAR from GitHub Releases.
+2. In Burp: Extender -> Extensions -> Add -> Extension type: Java -> Select the JAR.
+
+### Legacy Python (optional)
+1. In Burp: Extender -> Extensions -> Add -> Extension type: Python -> Select `Swagger2BurpExtender.py`.
+2. Requires Jython 2.7 (Burp -> Extender -> Options -> Python Environment).
+3. (Optional) For YAML, add SnakeYAML to Burp’s classpath.
+
+## Build (Java)
+- With Gradle: `./gradlew shadowJar` (or `gradle shadowJar`)
+- Output JAR: `montoya/build/libs/*-all.jar`
+
+## Usage
+1. Open the Swagger2Burp tab.
+2. (Optional) Enter JWT and/or custom headers. These are used both for fetching the spec and for the generated requests.
+3. If your Swagger 2.0 spec does not declare `host`/`basePath`, set **Base URL override** (for example: `https://api.example.com`).
+4. Choose Input mode:
+   - Auto-detect
+   - URL(s)
+   - Raw JSON
+5. Paste the spec URL(s) or the Raw JSON, then click Import.
+6. Review the generated requests, select desired ones, and click “Send selected to Repeater”.
+
+## Notes
+- If the spec lacks a resolvable base URL and no Base URL override is provided, such operations will be skipped.
+- For specs requiring Basic Auth to fetch: add a custom header like `Authorization: Basic <base64(user:pass)>`.
+
+## Privacy & Safety
+- Requests are built locally. Use on systems you have permission to test.
+
+## License
+MIT
+
+## Author
+- BolbolSec
+- GitHub: https://github.com/bolbolabadi/
