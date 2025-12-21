@@ -44,5 +44,7 @@ The base URL is taken from `servers`/`basePath` when available, or you can provi
 See CHANGELOG.md
 
 ## Screenshots
-- UI overview: TBD
-- Import and send to Repeater: TBD
+- UI overview: <img width="1793" height="1036" alt="swagger2burp-tab-ui" src="https://github.com/user-attachments/assets/289a4dad-a84d-484c-952a-c8360df5f765" />
+
+- Import and send to Repeater: <img width="1916" height="1007" alt="swagger2burp-tab-repeater" src="https://github.com/user-attachments/assets/8cf31369-2182-4920-a797-5b0d01311759" />
+
