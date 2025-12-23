@@ -47,7 +47,7 @@ Great for quickly bootstrapping testing coverage against large APIs. You’ll ha
    - Raw JSON
 5. Paste the spec URL(s) or the Raw JSON, then click Import.
 6. Review the generated requests, select desired ones, and click “Send selected to Repeater”.
-7. If you have only Swagger withou JSON file read this: https://github.com/bolbolabadi/swagger2burp/blob/main/IMPORT_SWAGGER_UI_INTO_BURP.md
+7. If you have only Swagger withou JSON file [read this](https://github.com/bolbolabadi/swagger2burp/blob/main/IMPORT_SWAGGER_UI_INTO_BURP.md)
 
 ## Notes
 - If the spec lacks a resolvable base URL and no Base URL override is provided, such operations will be skipped.
